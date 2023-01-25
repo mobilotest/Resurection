@@ -14,5 +14,7 @@ public class String {
         double doubleNumber = 120.34d;
         lastString = lastString + doubleNumber;
         System.out.println("Last String is equal to "+ lastString);
+
+        int myVar = 15 = 10;
     }
 }
