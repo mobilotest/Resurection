@@ -1,4 +1,4 @@
-public class Float {
+public class FloatDouble {
     public static void main(String[] args) {
 //        float myFloatMinValue = Float.MIN_VALUE;
 //        float myFloatMaxValue = Float.MAX_VALUE;
