@@ -15,5 +15,7 @@ public class Challenge4 {
         bonus  = 200;
         score = 10000;
 
+        int finalScore = score + (levelCompleted * bonus);
+        System.out.println("Your final score was "+ finalScore);
     }
 }
