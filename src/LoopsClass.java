@@ -84,5 +84,17 @@ public class LoopsClass {
         System.out.println(output - 100);
 
         System.out.println("= = = = = = =");
+        int number=0;
+        int count2 = 3;
+        {
+            System.out.println(count2);
+            count2++;
+        }
+        while (count2 <= number)
+        {
+            System.out.println(count2);
+            count2++;
+        }
+        System.out.println("= = = = = = =");
     }
 }
