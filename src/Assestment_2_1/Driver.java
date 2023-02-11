@@ -1,3 +1,5 @@
+package Assestment_2_1;
+
 /**
    A driver that demonstrates the class ArrayStack.
    
@@ -16,7 +18,7 @@ public class Driver
 	public static void testStackOperations()
 	{
 		System.out.println("Create a stack: ");
-		StackInterface<String> myStack = new ArrayStack<>();
+		StackInterface<String> myStack = new ArrayStack2<>();
 		System.out.println("isEmpty() returns " + myStack.isEmpty());
 		
 		System.out.println("\nAdd to stack to get\n" +
