@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class LoopsClass {
     public static void main(String[] args) {
         int [] a = {1, 2, 3, 4, 5};
@@ -96,5 +98,21 @@ public class LoopsClass {
             count2++;
         }
         System.out.println("= = = = = = =");
+        String phrase = "one potato two potato three potato four";
+        Scanner scan = new Scanner(phrase);
+        System.out.println(scan.next());
+        System.out.println(scan.next());
+
+        System.out.println("= = = = = = =");
+
+        scan.useDelimiter(",");
+        String data = "one,potato,two,potato";
+        Scanner scan2 = new Scanner(data);
+        scan2.useDelimiter(",");
+        System.out.println(scan2.next());
+        System.out.println(scan2.next());
+        System.out.println(scan2.next());
+        System.out.println("= = = = = = =");
+
     }
 }
