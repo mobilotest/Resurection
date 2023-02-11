@@ -7,7 +7,7 @@ class ArrayStack2Test {
     @org.junit.jupiter.api.Test
     void display()
     {
-
+ArrayStack2Test test = new ArrayStack2Test();
 
     }
 }
