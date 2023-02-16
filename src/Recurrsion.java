@@ -1,7 +1,57 @@
 public class Recurrsion {
     public static void main(String[] args) {
 //        countDown(3);
-        sumOf(3);
+        System.out.println(sumOf(3));
+        System.out.println("##############################");
+
+        System.out.println(mystery(9));
+        System.out.println("##############################");
+
+//        System.out.println(f(new int[]{3},1,3));
+        System.out.println("##############################");
+
+        System.out.println(unknown(4));
+
+    }
+
+    public static int max(int[] a) {           //public static int max(int[] a) {
+
+        int max = a[0];                         //int max = a[0];
+
+        int n = a.length;                       //int n = a.length;
+
+        for(int i = 1; i < n; i++)              //for(int i = 1; i < n; i++)
+
+            if(a[i] > max) max = a[i];          //if(a[i] > max) max = a[i];
+
+        return max;                             //return max;
+
+    }
+    static int unknown(int n)
+    {
+        if (n > 0)
+        {
+            System.out.print("?");
+            unknown(n-1);
+        }
+        return n;
+    }
+    public static int f(int [] a, int begin, int end) {
+        if(begin == end) {
+            return a[begin];
+        }
+        int mid = (begin + end)/2;
+        int a1 =f(a, begin, mid);
+        int a2 = f(a, mid + 1, end);
+
+        return (a1 > a2) ? a1 : a2;
+    }
+    static int mystery(int n){
+        if (n < 1)
+            return 0;
+        else if (n % 2 == 0)
+            return mystery(n-1);
+        else return 1 + mystery(n-1);
     }
     public static void countDown (int n) {
         System.out.println(n);

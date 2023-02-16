@@ -1,6 +1,4 @@
-package Assestment_2_1;
-
-import static org.junit.jupiter.api.Assertions.*;
+package Assestment_1_3;
 
 class ArrayStack2Test{
 
