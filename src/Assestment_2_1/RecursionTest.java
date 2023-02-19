@@ -1,14 +1,27 @@
 package Assestment_2_1;
 
 public class RecursionTest {
-    public static void main(String[] args) {
-        System.out.println(summa(4));
+    public static int computePay(int day) {
+        if (day == 1) {
+            return 1;
+        } else {
+            return 2 * computePay(day - 1);
+        }
     }
-    public static long summa(int n) {
-        long sum = 1;
-        for (int i = 1; i < n; i++) {
-            sum = summa(i)*2;
-            }
-        return sum;
+
+    public static long computeSavings(int day) {
+        if (day == 1) {
+            return 1;
+        } else {
+            return computePay(day) + computeSavings(day - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        int day = 39;
+        int pay = computePay(day);
+        long savings = computeSavings(day);
+        System.out.println("Pay on day " + day + ": " + pay + " cents");
+        System.out.println("Savings on day " + day + ": " + savings + " cents");
     }
 }
