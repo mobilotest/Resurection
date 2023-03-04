@@ -1,3 +1,5 @@
+package Assestment_3_1;
+
 public interface QueueInterface<T> {
     /** Adds a new entry to the back of this queue.
 	@param newEntry  an object to be added */

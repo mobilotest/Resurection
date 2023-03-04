@@ -1,4 +1,6 @@
-public class ArrayQueue<T> implements QueueInterface<T>  {
+package Assestment_3_1;
+
+public class ArrayQueue<T> implements QueueInterface<T> {
     private T[] queue; // circular array of queue entries and one unused location
     private int frontIndex;
     private int backIndex;
@@ -72,5 +74,16 @@ public class ArrayQueue<T> implements QueueInterface<T>  {
 	frontIndex = 0;
 	backIndex = queue.length - 1;
     }
+
+	public static boolean check(String s){
+		String s_modified = s.replaceAll("[^A-Za-z]+", "").toUpperCase();
+		String part1 = s_modified.substring(0,s_modified.length()/2);
+		String part2 = s_modified.substring(s_modified.length()/2, s_modified.length());
+		if(part1.compareTo(part2) == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
     
 } // end ArrayQueue
