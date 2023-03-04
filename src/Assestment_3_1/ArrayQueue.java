@@ -75,15 +75,69 @@ public class ArrayQueue<T> implements QueueInterface<T> {
 	backIndex = queue.length - 1;
     }
 
-	public static boolean check(String s){
-		String s_modified = s.replaceAll("[^A-Za-z]+", "").toUpperCase();
-		String part1 = s_modified.substring(0,s_modified.length()/2);
-		String part2 = s_modified.substring(s_modified.length()/2, s_modified.length());
-		if(part1.compareTo(part2) == 0){
-			return true;
-		}else{
+//	public static boolean check(String s){
+//		String s_modified = s.replaceAll("[^A-Za-z]+", "").toUpperCase();
+//		String part1 = s_modified.substring(0,s_modified.length()/2);
+//		String part2 = s_modified.substring(s_modified.length()/2, s_modified.length());
+//		if(part1.compareTo(part2) == 0){
+//			return true;
+//		}else{
+//			return false;
+//		}
+//	}
+
+	public static boolean check(String s) {
+		// Remove all blanks and punctuation marks from the string
+		String str = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+		// Create a queue to hold the characters in the first half of the string
+		QueueInterface<Character> queue = new ArrayQueue<>();
+
+		// Add the characters in the first half of the string to the queue
+		for (int i = 0; i < str.length() / 2; i++) {
+			queue.enqueue(str.charAt(i));
+		}
+
+		// Check if the second half of the string matches the characters in the queue
+		for (int i = str.length() - 1; i >= str.length() / 2; i--) {
+			char c = str.charAt(i);
+			if (queue.isEmpty() || queue.dequeue() != c) {
+				return false;
+			}
+		}
+
+		// If we reach this point, the string has the desired property
+		return true;
+	}
+
+	public void splice(QueueInterface<T> anotherQueue) {
+		if (anotherQueue == null || anotherQueue.isEmpty()) {
+			return;
+		}
+
+		while (!anotherQueue.isEmpty()) {
+			T item = anotherQueue.dequeue();
+			enqueue(item);
+		}
+	}
+
+	public boolean enqueueNoDuplicate(T item) {
+		if (contains(item)) {
 			return false;
 		}
+
+		enqueue(item);
+		return true;
+	}
+
+	private boolean contains(T item) {
+		for (int i = frontIndex; i != backIndex; i = (i + 1) % queue.length) {
+			if (queue[i] != null && queue[i].equals(item)) {
+				return true;
+			}
+		}
+
+		return queue[backIndex] != null && queue[backIndex].equals(item);
 	}
     
 } // end ArrayQueue
