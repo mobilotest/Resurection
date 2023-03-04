@@ -86,41 +86,38 @@ public class ArrayQueue<T> implements QueueInterface<T> {
 //		}
 //	}
 
+	//P1
 	public static boolean check(String s) {
-		// Remove all blanks and punctuation marks from the string
-		String str = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-
-		// Create a queue to hold the characters in the first half of the string
+		// ignoring blanks and the comma, and case
+		s = s.replaceAll("[^A-Za-z]", "").toLowerCase();
 		QueueInterface<Character> queue = new ArrayQueue<>();
 
-		// Add the characters in the first half of the string to the queue
-		for (int i = 0; i < str.length() / 2; i++) {
-			queue.enqueue(str.charAt(i));
+		// Enqueue the first half of the String
+		for (int i = 0; i < s.length() / 2; i++) {
+			queue.enqueue(s.charAt(i));
 		}
 
-		// Check if the second half of the string matches the characters in the queue
-		for (int i = str.length() - 1; i >= str.length() / 2; i--) {
-			char c = str.charAt(i);
-			if (queue.isEmpty() || queue.dequeue() != c) {
+		// Dequeue and compare with the second half of the String
+		for (int i = s.length() / 2; i < s.length(); i++) {
+			if (queue.isEmpty() || queue.dequeue() != s.charAt(i)) {
 				return false;
 			}
 		}
-
-		// If we reach this point, the string has the desired property
 		return true;
 	}
 
+	//P2 Part 1
 	public void splice(QueueInterface<T> anotherQueue) {
 		if (anotherQueue == null || anotherQueue.isEmpty()) {
 			return;
 		}
-
 		while (!anotherQueue.isEmpty()) {
 			T item = anotherQueue.dequeue();
 			enqueue(item);
 		}
 	}
 
+	//P2 Part 2
 	public boolean enqueueNoDuplicate(T item) {
 		if (contains(item)) {
 			return false;
@@ -129,14 +126,12 @@ public class ArrayQueue<T> implements QueueInterface<T> {
 		enqueue(item);
 		return true;
 	}
-
 	private boolean contains(T item) {
 		for (int i = frontIndex; i != backIndex; i = (i + 1) % queue.length) {
 			if (queue[i] != null && queue[i].equals(item)) {
 				return true;
 			}
 		}
-
 		return queue[backIndex] != null && queue[backIndex].equals(item);
 	}
     
