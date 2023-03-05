@@ -43,7 +43,7 @@ public class QueueTest {
 
 		System.out.println("- - - - - - - - - - - - - - - - -");
 
-		//Test the splice method
+		//Test the splice method:
 		ArrayQueue<Integer> queue1 = new ArrayQueue<>(3);
 		ArrayQueue<Integer> queue2 = new ArrayQueue<>(3);
 		queue1.enqueue(1);
@@ -62,16 +62,32 @@ public class QueueTest {
 
 		System.out.println("- - - - - - - - - - - - - - - - -");
 
-// Test the enqueueNoDuplicate method
-		assert queue2.enqueueNoDuplicate(5) == false;
-		assert queue2.enqueueNoDuplicate(6) == true;
-		assert queue2.enqueueNoDuplicate(5) == false;
-		assert queue2.getFront() == 6;
+		// Test the enqueueNoDuplicate method:
+		ArrayQueue<String> queue = new ArrayQueue<>();
+		queue.enqueueNoDuplicate("apple");
+		queue.enqueueNoDuplicate("banana");
+		queue.enqueueNoDuplicate("cherry");
+		queue.enqueueNoDuplicate("apple"); // adding duplicate
+		queue.enqueueNoDuplicate("date");
+		System.out.println(queue.dequeue()); // should print apple
+		System.out.println(queue.dequeue()); // should print banana
+		System.out.println(queue.dequeue()); // should print cherry
+		System.out.println(queue.dequeue()); // should print date
+		System.out.println(queue.isEmpty()); // should print true
 
-// Test the check method
-		assert ArrayQueue.check("booboo") == true;
-		assert ArrayQueue.check("hello, hello") == true;
-		assert ArrayQueue.check("rattan") == false;
-		assert ArrayQueue.check("abcab") == false;
+		System.out.println("- - - - - - - - - - - - - - - - -");
+
+		// Another test case:
+		ArrayQueue<Integer> queue3 = new ArrayQueue<>();
+		queue3.enqueue(1);
+		queue3.enqueue(2);
+		queue3.enqueue(3);
+
+		System.out.println(queue3.enqueueNoDuplicate(2)); // false
+		System.out.println(queue3.enqueueNoDuplicate(4)); // true
+
+		while (!queue3.isEmpty()) {
+			System.out.println(queue3.dequeue());
+		}
 	}
 }

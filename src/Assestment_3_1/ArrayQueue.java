@@ -75,6 +75,7 @@ public class ArrayQueue<T> implements QueueInterface<T> {
 	backIndex = queue.length - 1;
     }
 
+//	Without Queue solution:
 //	public static boolean check(String s){
 //		String s_modified = s.replaceAll("[^A-Za-z]+", "").toUpperCase();
 //		String part1 = s_modified.substring(0,s_modified.length()/2);
@@ -119,20 +120,56 @@ public class ArrayQueue<T> implements QueueInterface<T> {
 
 	//P2 Part 2
 	public boolean enqueueNoDuplicate(T item) {
-		if (contains(item)) {
-			return false;
+		// Check if item is already in the queue
+		for (int i = frontIndex; i != (backIndex + 1) % queue.length; i = (i + 1) % queue.length) {
+			if (queue[i] != null && queue[i].equals(item)) {
+				return false;
+			}
 		}
-
+		// If item is not in the queue, add it
 		enqueue(item);
 		return true;
 	}
-	private boolean contains(T item) {
-		for (int i = frontIndex; i != backIndex; i = (i + 1) % queue.length) {
-			if (queue[i] != null && queue[i].equals(item)) {
-				return true;
-			}
-		}
-		return queue[backIndex] != null && queue[backIndex].equals(item);
-	}
-    
 } // end ArrayQueue
+
+//		TEST RESULTS:
+//
+//		Jim is at the front of the queue.
+//		Jim is removed from the queue.
+//		Jess is at the front of the queue.
+//		Jess is removed from the queue.
+//		- - - - - - - - - - - - - - - - -
+//		"booboo" true
+//		"hello, hello" true
+//		"" true
+//		", ," true
+//		"tartar" true
+//		" tar      ,,,    tar  " true
+//		"rattan" false
+//		"abcab" false
+//		"racecar" false
+//		"a" false
+//		"hello, world" false
+//		"star, ,tar" false
+//		"madam, I'm Adam" false
+//		- - - - - - - - - - - - - - - - -
+//		1
+//		2
+//		3
+//		4
+//		5
+//		- - - - - - - - - - - - - - - - -
+//		apple
+//		banana
+//		cherry
+//		date
+//		true
+//		- - - - - - - - - - - - - - - - -
+//		false
+//		true
+//		1
+//		2
+//		3
+//		4
+//
+//		Process finished with exit code 0
