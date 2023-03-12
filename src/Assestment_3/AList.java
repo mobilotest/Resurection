@@ -157,16 +157,47 @@ public class AList<T> implements ListInterface<T>
    
    
    public int getLastIndex(T item) {
-   
+	   for (int i = numberOfEntries - 1; i >= 0; i--) {
+		   if (list[i].equals(item)) {
+			   return i+1;
+		   }
+	   }
+	   return -1; // item not found
    }
    
    public boolean equals(Object other) {
-   
-   
+	   boolean isEqual = false;
+	   if (other instanceof AList<?>) {
+		   AList<?> otherList = (AList<?>) other;
+		   if (numberOfEntries == otherList.numberOfEntries) {
+			   isEqual = true;
+			   for (int i = 0; i < numberOfEntries; i++) {
+				   if (!list[i].equals(otherList.list[i])) {
+					   isEqual = false;
+					   break;
+				   }
+			   }
+		   }
+	   }
+	   return isEqual;
    }
    
    public int removeEvery(T item) {
-	   
+	   int occurrences = 0;
+	   for (int i = 0; i < numberOfEntries; i++) {
+		   if (list[i].equals(item)) {
+			   // shift elements to the left to remove the item
+			   for (int j = i; j < numberOfEntries - 1; j++) {
+				   list[j] = list[j + 1];
+			   }
+			   // set the lazźst element to null to avoid duplicate
+			   list[numberOfEntries - 1] = null;
+			   occurrences++;
+			   i--; // re-check current index since we shifted elements
+			   numberOfEntries--;
+		   }
+	   }
+	   return occurrences;
    }
    
    

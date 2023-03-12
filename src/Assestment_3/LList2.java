@@ -216,31 +216,87 @@ public class LList2<T> implements ListInterface<T>
 
 	// Lab 3
 	// Problem 1
-	public int getIndex(T item) {
-	
-		return 0;
+	public int getLastIndex(T item) {
+		int lastIndex = -1;
+		int currentIndex = 1;
+		Node currentNode = firstNode;
+		while (currentNode != null) {
+			if (currentNode.getData().equals(item)) {
+				lastIndex = currentIndex;
+			}
+			currentIndex++;
+			currentNode = currentNode.getNextNode();
+		}
+		return lastIndex;
 	}
+
 	// Problem 2
 	public int removeEvery(T item) {
-	
-		return 0;
+		int count = 0;
+		Node currentNode = firstNode;
+		Node previousNode = null;
+
+		while (currentNode != null) {
+			if (currentNode.getData().equals(item)) {
+				if (previousNode == null) { // item is at the beginning of the list
+					firstNode = currentNode.getNextNode();
+				} else {
+					previousNode.setNextNode(currentNode.getNextNode());
+				}
+				if (currentNode.getNextNode() == null) { // item is at the end of the list
+					lastNode = previousNode;
+				}
+				numberOfEntries--;
+				count++;
+			} else {
+				previousNode = currentNode;
+			}
+			currentNode = currentNode.getNextNode();
+		}
+
+		return count;
 	}
+
 	// Problem 3
 	public boolean equals(Object other) {
-	
-		return false;
+		if (other == this) {
+			return true;
+		}
+		if (!(other instanceof LList2)) {
+			return false;
+		}
+		LList2<T> otherList = (LList2<T>) other;
+		if (numberOfEntries != otherList.numberOfEntries) {
+			return false;
+		}
+		Node currentNode = firstNode;
+		Node otherNode = otherList.firstNode;
+		while (currentNode != null && otherNode != null) {
+			if (!currentNode.getData().equals(otherNode.getData())) {
+				return false;
+			}
+			currentNode = currentNode.getNextNode();
+			otherNode = otherNode.getNextNode();
+		}
+		return true;
 	}
 	
 	//Problem 4
 	public boolean contains2(T anEntry) {
-	
-		return false;
+		return contains(anEntry, firstNode);
 	}
+
 	private boolean contains(T anEntry, Node startNode) {
-		
-		return false;
+		boolean found = false;
+		if (startNode == null) { // base case
+			found = false;
+		} else if (anEntry.equals(startNode.getData())) {
+			found = true;
+		} else {
+			found = contains(anEntry, startNode.getNextNode());
+		}
+		return found;
 	}
-	
 	
 	private class Node 
 	{
