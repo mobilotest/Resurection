@@ -336,4 +336,3 @@ public class LList2<T> implements ListInterface<T>
 		} // end setNextNode
 	} // end Node
 } // end LList2
-

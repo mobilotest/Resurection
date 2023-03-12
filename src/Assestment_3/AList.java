@@ -153,8 +153,7 @@ public class AList<T> implements ListInterface<T>
 	
 	for (int index = removedIndex; index < lastIndex; index++)
 	    list[index] = list[index + 1];
-    } // end removeGap
-   
+    } // end removeGap
    
    public int getLastIndex(T item) {
 	   for (int i = numberOfEntries - 1; i >= 0; i--) {
@@ -199,6 +198,4 @@ public class AList<T> implements ListInterface<T>
 	   }
 	   return occurrences;
    }
-   
-   
 } // end AList
