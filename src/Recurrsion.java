@@ -12,7 +12,26 @@ public class Recurrsion {
 
         System.out.println(unknown(4));
 
+        System.out.println("##############################");
+        recurse(3);
+        System.out.print("---");
+        recurse(2);
     }
+        public static void recurse(int x)
+        {
+            if (x<=1)
+                System.out.print("***");
+            else if ((x % 2) == 0)
+            {
+                System.out.print("+++");
+                recurse(x-2);
+            }
+            else
+            {
+                System.out.print(x);
+                recurse(x-1);
+            }
+        }
 
     public static int max(int[] a) {           //public static int max(int[] a) {
 
