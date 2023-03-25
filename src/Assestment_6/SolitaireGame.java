@@ -1,6 +1,7 @@
 package Assestment_6;
 
-import Assestment_6.ArrayListWithIterator;
+import java.util.Iterator;
+
 /**
    A solitaire matching game in which you have a list of random
    integer values between 10 and 99. You remove from the list any
@@ -13,7 +14,10 @@ public class SolitaireGame
 	/** Initializes the list with 40 random 2 digit numbers. */
 	public static void initializeList(ArrayListWithIterator<Integer> theList)
 	{
-	
+		Random random = new Random();
+		for (int i = 0; i < 40; i++) {
+			theList.add(random.nextInt(90) + 10);
+		}
 	} // end initializeList
 
 	/** Sees whether two numbers are removable.
@@ -22,7 +26,7 @@ public class SolitaireGame
  		@return  True if x and y match in the first or second digit. */
 	public static boolean removable(Integer x, Integer y)
 	{
-	
+		return x / 10 == y / 10 || x % 10 == y % 10;
 	} // end removable
 
 	/** Display the contents of theList using an Iterator
@@ -30,14 +34,37 @@ public class SolitaireGame
 	 */
 	public static void displayList(ArrayListWithIterator<Integer> theList) 
 	{
-		
+		Iterator<Integer> iterator = theList.getIterator();
+		while (iterator.hasNext()) {
+			System.out.print(iterator.next() + " ");
+		}
+		System.out.println();
 	}
 	/** Scans over the list and removes any pairs of values that are removable.
 		@param theList  The list of 2 digit integers to scan over.
 		@return  True if any pair of integers was removed. */
 	public static boolean scanAndRemovePairs(ArrayListWithIterator<Integer> theList)
 	{
-		
+		boolean removedPair = false;
+		Iterator<Integer> iterator = theList.getIterator();
+
+		while (iterator.hasNext()) {
+			Integer current = iterator.next();
+
+			if (iterator.hasNext()) {
+				Integer next = iterator.next();
+
+				if (removable(current, next)) {
+					iterator.remove();
+					iterator.previous();
+					iterator.remove();
+					removedPair = true;
+				} else {
+					iterator.previous();
+				}
+			}
+		}
+		return removedPair;
 	} // end scanAndRemovePairs
 
 	public static void main(String args[])
