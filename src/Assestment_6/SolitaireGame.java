@@ -1,6 +1,10 @@
 package Assestment_6;
 
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.Random;
 
 /**
    A solitaire matching game in which you have a list of random
@@ -34,7 +38,7 @@ public class SolitaireGame
 	 */
 	public static void displayList(ArrayListWithIterator<Integer> theList) 
 	{
-		Iterator<Integer> iterator = theList.getIterator();
+		Iterator<Integer> iterator = theList.iterator();
 		while (iterator.hasNext()) {
 			System.out.print(iterator.next() + " ");
 		}
@@ -46,11 +50,9 @@ public class SolitaireGame
 	public static boolean scanAndRemovePairs(ArrayListWithIterator<Integer> theList)
 	{
 		boolean removedPair = false;
-		Iterator<Integer> iterator = theList.getIterator();
-
+		ListIterator<Integer> iterator = theList.listIterator();
 		while (iterator.hasNext()) {
 			Integer current = iterator.next();
-
 			if (iterator.hasNext()) {
 				Integer next = iterator.next();
 
@@ -69,7 +71,27 @@ public class SolitaireGame
 
 	public static void main(String args[])
 	{
-		
+		ArrayList<Integer> theList = new ArrayList<Integer>();
+		initializeList(theList);
+
+		System.out.println("The list is originally: ");
+		displayList(theList);
+
+		while (!theList.isEmpty()) {
+			if (scanAndRemovePairs(theList)) {
+				System.out.println("After removing a pair: ");
+				displayList(theList);
+			} else {
+				System.out.println("No more pairs can be removed.");
+				break;
+			}
+		}
+
+		if (theList.isEmpty()) {
+			System.out.println("Congratulations! You win!");
+		} else {
+			System.out.println("Sorry, better luck next time.");
+		}
 	} // end main
 } // end SolitaireGame
 
