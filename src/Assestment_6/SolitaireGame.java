@@ -1,17 +1,14 @@
 package Assestment_6;
 
-
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.Random;
 
 /**
-   A solitaire matching game in which you have a list of random
-   integer values between 10 and 99. You remove from the list any
-   pair of consecutive integers whose first or second digits match.
-   If all values are removed, you win.
-
+ A solitaire matching game in which you have a list of random
+ integer values between 10 and 99. You remove from the list any
+ pair of consecutive integers whose first or second digits match.
+ If all values are removed, you win.
  */
 public class SolitaireGame
 {
@@ -23,20 +20,18 @@ public class SolitaireGame
 			theList.add(random.nextInt(90) + 10);
 		}
 	} // end initializeList
-
 	/** Sees whether two numbers are removable.
-		@param x  The first 2 digit integer value.
-		@param y  The second 2 digit integer value.
- 		@return  True if x and y match in the first or second digit. */
+	 @param x The first 2 digit integer value.
+	 @param y The second 2 digit integer value.
+	 @return True if x and y match in the first or second digit. */
 	public static boolean removable(Integer x, Integer y)
 	{
 		return x / 10 == y / 10 || x % 10 == y % 10;
 	} // end removable
-
 	/** Display the contents of theList using an Iterator
-	 * 
+	 *
 	 */
-	public static void displayList(ArrayListWithIterator<Integer> theList) 
+	public static void displayList(ArrayListWithIterator<Integer> theList)
 	{
 		Iterator<Integer> iterator = theList.iterator();
 		while (iterator.hasNext()) {
@@ -45,52 +40,44 @@ public class SolitaireGame
 		System.out.println();
 	}
 	/** Scans over the list and removes any pairs of values that are removable.
-		@param theList  The list of 2 digit integers to scan over.
-		@return  True if any pair of integers was removed. */
+	 @param theList The list of 2 digit integers to scan over.
+	 @return True if any pair of integers was removed. */
 	public static boolean scanAndRemovePairs(ArrayListWithIterator<Integer> theList)
 	{
-		boolean removedPair = false;
-		ListIterator<Integer> iterator = theList.listIterator();
+		boolean removed = false;
+		Iterator<Integer> iterator = theList.iterator();
+		Integer prev = null;
+
+		// Loop through the list using an iterator
 		while (iterator.hasNext()) {
 			Integer current = iterator.next();
-			if (iterator.hasNext()) {
-				Integer next = iterator.next();
 
-				if (removable(current, next)) {
-					iterator.remove();
-					iterator.previous();
-					iterator.remove();
-					removedPair = true;
-				} else {
-					iterator.previous();
-				}
+			// If prev is not null and the current and prev numbers are removable, remove the current number
+			if (prev != null && removable(prev, current)) {
+				iterator.remove();
+				removed = true;
+				System.out.println("   Removed: " + prev + "  " + current);
+				// Reset prev to null to skip the next number
+				prev = null;
+			} else {
+				// Set prev to the current number
+				prev = current;
 			}
 		}
-		return removedPair;
+		return removed;
 	} // end scanAndRemovePairs
-
 	public static void main(String args[])
 	{
-		ArrayList<Integer> theList = new ArrayList<Integer>();
+		ArrayListWithIterator<Integer> theList = new ArrayListWithIterator<Integer>();
 		initializeList(theList);
-
-		System.out.println("The list is originally: ");
-		displayList(theList);
-
-		while (!theList.isEmpty()) {
-			if (scanAndRemovePairs(theList)) {
-				System.out.println("After removing a pair: ");
-				displayList(theList);
-			} else {
-				System.out.println("No more pairs can be removed.");
-				break;
-			}
+		System.out.println("The list is originally: " + Arrays.toString(theList.toArray()));
+		while (scanAndRemovePairs(theList)) {
+			System.out.println("The list is now: " + Arrays.toString(theList.toArray()));
 		}
-
 		if (theList.isEmpty()) {
-			System.out.println("Congratulations! You win!");
+			System.out.println("The list is empty.");
 		} else {
-			System.out.println("Sorry, better luck next time.");
+			System.out.println("No more pairs to remove.");
 		}
 	} // end main
 } // end SolitaireGame

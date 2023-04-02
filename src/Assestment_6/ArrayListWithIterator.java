@@ -230,7 +230,11 @@ public class ArrayListWithIterator<T> implements ListWithIteratorInterface<T>
       return iterator();
    } // end getIterator
 
-   // The array of list entries uses indexes that begin at 1 and
+    public int size() {
+        return numberOfEntries;
+    }
+
+    // The array of list entries uses indexes that begin at 1 and
    // correspond to the position of the entry within the list.
    private class IteratorForArrayList implements Iterator<T>
    {
