@@ -7,7 +7,7 @@ public class Lab7Test {
         int[] arr0 = {4, 7, 5, 2, 6, 1};
         int[] arr1 = {3, 6, 5, 1, 4};
         int[] arr2 = {5, 3, 1, 2, 4};
-        int[] arr3 = {5, 3, 1, 2, 4};
+        int[] arr3 = {5, 10 , 1, 20 , 7 , 8};
         int[] arr4 = {1, 2, 3, 4, 5, 6, 7, 8};
         int[] arr5 = {4, 5, 2, 1, 3};
         int[] arr6 = {1, 2, 2, 3, 4, 4, 4, 5};
@@ -28,16 +28,16 @@ public class Lab7Test {
 
         // Problem 3 - Find k-th smallest element
         System.out.println("- - - - - - - - - - - - - - - - - - -");
-        System.out.println(Lab7.findKthSmallest(arr3, 2)); // expected output: 2
-        System.out.println(Lab7.findKthSmallest(arr4, 4)); // expected output: 4
-        System.out.println(Lab7.findKthSmallest(arr5, 3)); // expected output: 3
-        System.out.println(Lab7.findKthSmallest(arr6, 6)); // expected output: 4
-        System.out.println(Lab7.findKthSmallest(arr7, 1)); // expected output: 2
-        System.out.println(Lab7.findKthSmallest(arr8, 7)); // expected output: 7
+        System.out.println(Lab7.findKthSmallest(arr3, 1)); // expected output: 1
+        System.out.println(Lab7.findKthSmallest(arr3, 2)); // expected output: 5
+        System.out.println(Lab7.findKthSmallest(arr3, 3)); // expected output: 7
+        System.out.println(Lab7.findKthSmallest(arr3, 4)); // expected output: 8
+        System.out.println(Lab7.findKthSmallest(arr3, 5)); // expected output: 10
+        System.out.println(Lab7.findKthSmallest(arr3, 6)); // expected output: 20
 
         // Problem 4 - Find median
         System.out.println("- - - - - - - - - - - - - - - - - - -");
-        System.out.println(Lab7.findMedian(arr3)); // expected output: 3
+        System.out.println(Lab7.findMedian(arr3)); // expected output: 7
         System.out.println(Lab7.findMedian(arr4)); // expected output: 4
         System.out.println(Lab7.findMedian(arr5)); // expected output: 3
         System.out.println(Lab7.findMedian(arr6)); // expected output: 3
