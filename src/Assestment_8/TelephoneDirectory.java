@@ -1,5 +1,3 @@
-package Assestment_8;
-
 import java.util.Scanner;
 
 class Name implements Comparable<Name>

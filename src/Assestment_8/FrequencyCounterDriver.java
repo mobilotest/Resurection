@@ -1,13 +1,11 @@
-package Assestment_8;
-
+import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 public class FrequencyCounterDriver
 {
     public static void main (String [] args) {
-        FrequencyCounter wordCounter = new FrequencyCounter();
+        FrequencyCounter wordCounter = new FrequencyCounter ();
         String fileName = "Data.txt"; // or file name could be read
         try {
             Scanner data = new Scanner (new File (fileName));
