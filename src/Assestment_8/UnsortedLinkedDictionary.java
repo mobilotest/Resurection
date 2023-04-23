@@ -3,7 +3,7 @@ package Assestment_8;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class UnsortedLinkedDictionary<K, V>  implements DictionaryInterface<K, V> {
+public class UnsortedLinkedDictionary<K, V>  {
 	private Node firstNode;
 	private int numberOfEntries;
 
