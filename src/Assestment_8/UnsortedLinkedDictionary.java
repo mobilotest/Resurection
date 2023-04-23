@@ -3,7 +3,7 @@ package Assestment_8;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class UnsortedLinkedDictionary<K, V>  {
+public class UnsortedLinkedDictionary<K, V> {
 	private Node firstNode;
 	private int numberOfEntries;
 
@@ -14,77 +14,81 @@ public class UnsortedLinkedDictionary<K, V>  {
 
    public V add(K key, V value) {
 	   if (key == null || value == null) {
-		   throw new IllegalArgumentException("Key or value cannot be null.");
+		   throw new IllegalArgumentException("Cannot add null key or value");
 	   }
 
-	   // Search for key in chain
-	   Node currentNode = firstNode;
-	   while (currentNode != null) {
-		   if (key.equals(currentNode.getKey())) {
-			   // Key already exists, update value and return old value
-			   V oldValue = currentNode.getValue();
-			   currentNode.setValue(value);
-			   return oldValue;
-		   }
-		   currentNode = currentNode.getNextNode();
-	   }
-
-	   // Key not found, add new node at beginning of chain
 	   Node newNode = new Node(key, value);
-	   newNode.setNextNode(firstNode);
-	   firstNode = newNode;
+
+	   if (firstNode == null) {
+		   firstNode = newNode;
+	   } else {
+		   Node currentNode = firstNode;
+
+		   while (currentNode != null) {
+			   if (currentNode.key.equals(key)) {
+				   V oldValue = currentNode.value;
+				   currentNode.value = value;
+				   return oldValue;
+			   } else {
+				   currentNode = currentNode.next;
+			   }
+		   }
+
+		   newNode.next = firstNode;
+		   firstNode = newNode;
+	   }
+
 	   numberOfEntries++;
-	   return null; // No old value to return
+	   return null;
    } // end add
 
    public V remove(K key) {
 	   if (key == null) {
-		   throw new IllegalArgumentException("Key cannot be null.");
+		   throw new IllegalArgumentException("Cannot remove null key");
 	   }
 
-	   V result = null;
+	   V removedValue = null;
 
-	   if (!isEmpty()) {
-		   if (key.equals(firstNode.getKey())) {
-			   // Key is in first node
-			   result = firstNode.getValue();
-			   firstNode = firstNode.getNextNode();
+	   if (firstNode != null) {
+		   if (firstNode.key.equals(key)) {
+			   removedValue = firstNode.value;
+			   firstNode = firstNode.next;
 			   numberOfEntries--;
 		   } else {
-			   // Key is in some other node
-			   Node prevNode = firstNode;
-			   Node currentNode = firstNode.getNextNode();
-			   while (currentNode != null) {
-				   if (key.equals(currentNode.getKey())) {
-					   // Key found, remove node
-					   result = currentNode.getValue();
-					   prevNode.setNextNode(currentNode.getNextNode());
+			   Node currentNode = firstNode;
+
+			   while (currentNode.next != null) {
+				   if (currentNode.next.key.equals(key)) {
+					   removedValue = currentNode.next.value;
+					   currentNode.next = currentNode.next.next;
 					   numberOfEntries--;
 					   break;
+				   } else {
+					   currentNode = currentNode.next;
 				   }
-				   prevNode = currentNode;
-				   currentNode = currentNode.getNextNode();
 			   }
 		   }
 	   }
 
-	   return result;
+	   return removedValue;
    } // end remove
 
    public V getValue(K key) {
 	   if (key == null) {
-		   throw new IllegalArgumentException("Key cannot be null.");
+		   throw new IllegalArgumentException("Cannot get value for null key");
 	   }
 
 	   Node currentNode = firstNode;
+
 	   while (currentNode != null) {
-		   if (key.equals(currentNode.getKey())) {
-			   return currentNode.getValue();
+		   if (currentNode.key.equals(key)) {
+			   return currentNode.value;
+		   } else {
+			   currentNode = currentNode.next;
 		   }
-		   currentNode = currentNode.getNextNode();
 	   }
 
-	   return null; // Key not found
+	   return null;
    } // end getValue
 
 	public boolean contains(K key) {
