@@ -67,6 +67,25 @@ class Driver {
 		System.out.println("Occurrences of 'a' using count1 method: " + count1Result);
 		System.out.println("Occurrences of 'a' using count2 method: " + count2Result);
 	}
+
+	public static void testIsIsomorphic() {
+		BinaryTree<String> tree1 = new BinaryTree<>("A");
+		BinaryTree<String> left1 = new BinaryTree<>("B");
+		BinaryTree<String> right1 = new BinaryTree<>("C");
+		tree1.setTree("A", left1, right1);
+
+		BinaryTree<String> tree2 = new BinaryTree<>("X");
+		BinaryTree<String> left2 = new BinaryTree<>("Y");
+		BinaryTree<String> right2 = new BinaryTree<>("Z");
+		tree2.setTree("X", left2, right2);
+
+		BinaryTree<String> tree3 = new BinaryTree<>("A");
+		BinaryTree<String> left3 = new BinaryTree<>("B");
+		tree3.setTree("A", left3, null);
+
+		System.out.println("tree1 and tree2 isomorphic? " + tree1.isIsomorphic(tree2)); // Expected: true
+		System.out.println("tree1 and tree3 isomorphic? " + tree1.isIsomorphic(tree3)); // Expected: false
+	}
     public static void main(String [] args) {
 		// D, F, G and H are leaves
 		BinaryTree<String> dTree = new BinaryTree<String>("D");
@@ -103,5 +122,74 @@ class Driver {
     	
 		iteratorTraversal();
 		expressionTree();
+		System.out.println("- - - - - - - - - - - - - - - - - - -");
+		testCountMethods();
+		System.out.println("- - - - - - - - - - - - - - - - - - -");
+		testIsIsomorphic();
+		System.out.println("- - - - - - - - - - - - - - - - - - -");
+		String infix = "a*b/(c-d*e)+f/g";
+		ExpressionTree tree = new ExpressionTree(infix);
+		System.out.println("Inorder traversal of the expression tree:");
+		tree.inorderTraversal();
     }
 }
+
+/*		Tree rooted at A:
+		Root of tree contains A
+		Height of tree is 4
+		Tree has 8 nodes
+
+		Tree rooted at B:
+		Root of tree contains B
+		Height of tree is 3
+		Tree has 5 nodes
+		Inorder traversal of tree rooted at A
+		D
+		B
+		F
+		E
+		G
+		A
+		C
+		H
+		Inorder traversal of tree rooted at A using Iterator
+		String: d
+		String: b
+		String: e
+		String: a
+		String: f
+		String: g
+		String: c
+		Preorder traversal of tree rooted at A using Iterator
+		String: a
+		String: b
+		String: d
+		String: e
+		String: c
+		String: f
+		String: g
+		(a*b) + c = 5.0
+		- - - - - - - - - - - - - - - - - - -
+		Occurrences of 'a' using count1 method: 2
+		Occurrences of 'a' using count2 method: 2
+		- - - - - - - - - - - - - - - - - - -
+		tree1 and tree2 isomorphic? true
+		tree1 and tree3 isomorphic? false
+		- - - - - - - - - - - - - - - - - - -
+		Inorder traversal of the expression tree:
+		a
+		*
+		b
+		/
+		c
+		-
+		d
+		*
+		e
+		+
+		f
+		/
+		g
+
+		Process finished with exit code 0
+*/
