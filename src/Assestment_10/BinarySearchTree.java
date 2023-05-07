@@ -1,6 +1,6 @@
+package Assestment_10;
 
-public class BinarySearchTree < T extends Comparable < ? super T >>
-{
+public class BinarySearchTree < T extends Comparable < ? super T >> {
     private BinaryNode<T> root;
     
     public BinarySearchTree () {
@@ -158,5 +158,109 @@ public class BinarySearchTree < T extends Comparable < ? super T >>
         else
             rootNode = rootNode.getLeftChild ();
         return rootNode;
-    } 
+    }
+
+    //P1:
+    public boolean isBalanced() {
+        return isBalanced(root) != -1;
+    }
+
+    private int isBalanced(BinaryNode<T> node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftHeight = isBalanced(node.getLeftChild());
+        int rightHeight = isBalanced(node.getRightChild());
+
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        }
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    //P2:
+    public boolean isBST() {
+        return isBSTHelper(root, null, null);
+    }
+
+    private boolean isBSTHelper(BinaryNode<T> node, T min, T max) {
+        if (node == null) {
+            return true;
+        }
+
+        T value = node.getData();
+
+        if (min != null && value.compareTo(min) <= 0) {
+            return false;
+        }
+
+        if (max != null && value.compareTo(max) >= 0) {
+            return false;
+        }
+
+        return isBSTHelper(node.getLeftChild(), min, value) && isBSTHelper(node.getRightChild(), value, max);
+    }
+
+    //P3:
+
+    public T getPredecessor(T entry) {
+        return getPredecessorHelper(root, entry, null);
+    }
+
+    private T getPredecessorHelper(BinaryNode<T> node, T entry, T predecessor) {
+        if (node == null) {
+            return null;
+        }
+
+        int comparison = entry.compareTo(node.getData());
+        if (comparison == 0) {
+            if (node.hasLeftChild()) {
+                return findMaxValue(node.getLeftChild());
+            } else {
+                return predecessor;
+            }
+        } else if (comparison < 0) {
+            return getPredecessorHelper(node.getLeftChild(), entry, predecessor);
+        } else {
+            return getPredecessorHelper(node.getRightChild(), entry, node.getData());
+        }
+    }
+
+    private T findMaxValue(BinaryNode<T> node) {
+        while (node.hasRightChild()) {
+            node = node.getRightChild();
+        }
+        return node.getData();
+    }
+
+    public static void main(String[] args) {
+        // Test case 1: An empty string should be balanced
+        String str1 = "";
+        boolean result1 = isBalanced(str1);
+        System.out.println("Test case 1: " + result1); // Expected output: true
+
+        // Test case 2: A string with balanced parentheses should return true
+        String str2 = "((()))";
+        boolean result2 = isBalanced(str2);
+        System.out.println("Test case 2: " + result2); // Expected output: true
+
+        // Test case 3: A string with unbalanced parentheses should return false
+        String str3 = "(()))";
+        boolean result3 = isBalanced(str3);
+        System.out.println("Test case 3: " + result3); // Expected output: false
+
+        // Test case 4: A string with only one type of parentheses should return false
+        String str4 = "(){}[]";
+        boolean result4 = isBalanced(str4);
+        System.out.println("Test case 4: " + result4); // Expected output: false
+
+        // Test case 5: A string with mismatched types of parentheses should return false
+        String str5 = "({[}])";
+        boolean result5 = isBalanced(str5);
+        System.out.println("Test case 5: " + result5); // Expected output: false
+    }
 }
+
+

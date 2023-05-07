@@ -1,3 +1,5 @@
+package Assestment_10;
+
 public class Person implements Comparable<Person>{
     String name;
     String id;
@@ -23,7 +25,6 @@ class Test {
 	
 	System.out.println("b.contains(p1) = " + b.contains(p1));
 	System.out.println("b.contains(p2) = " + b.contains(p2));
-    }
-
+	}
 }
 
