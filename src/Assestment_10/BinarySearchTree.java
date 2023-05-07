@@ -234,33 +234,6 @@ public class BinarySearchTree < T extends Comparable < ? super T >> {
         }
         return node.getData();
     }
-
-    public static void main(String[] args) {
-        // Test case 1: An empty string should be balanced
-        String str1 = "";
-        boolean result1 = isBalanced(str1);
-        System.out.println("Test case 1: " + result1); // Expected output: true
-
-        // Test case 2: A string with balanced parentheses should return true
-        String str2 = "((()))";
-        boolean result2 = isBalanced(str2);
-        System.out.println("Test case 2: " + result2); // Expected output: true
-
-        // Test case 3: A string with unbalanced parentheses should return false
-        String str3 = "(()))";
-        boolean result3 = isBalanced(str3);
-        System.out.println("Test case 3: " + result3); // Expected output: false
-
-        // Test case 4: A string with only one type of parentheses should return false
-        String str4 = "(){}[]";
-        boolean result4 = isBalanced(str4);
-        System.out.println("Test case 4: " + result4); // Expected output: false
-
-        // Test case 5: A string with mismatched types of parentheses should return false
-        String str5 = "({[}])";
-        boolean result5 = isBalanced(str5);
-        System.out.println("Test case 5: " + result5); // Expected output: false
-    }
 }
 
 
